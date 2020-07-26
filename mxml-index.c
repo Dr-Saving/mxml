@@ -1,15 +1,12 @@
 /*
  * Index support code for Mini-XML, a small XML file parsing library.
  *
- * Copyright 2003-2017 by Michael R Sweet.
+ * https://www.msweet.org/mxml
  *
- * These coded instructions, statements, and computer programs are the
- * property of Michael R Sweet and are protected by Federal copyright
- * law.  Distribution and use rights are outlined in the file "COPYING"
- * which should have been included with this file.  If this file is
- * missing or damaged, see the license at:
+ * Copyright © 2003-2019 by Michael R Sweet.
  *
- *     https://michaelrsweet.github.io/mxml
+ * Licensed under Apache License v2.0.  See the file "LICENSE" for more
+ * information.
  */
 
 /*
@@ -17,7 +14,7 @@
  */
 
 #include "config.h"
-#include "mxml.h"
+#include "mxml-private.h"
 
 
 /*
@@ -333,8 +330,7 @@ mxmlIndexNew(mxml_node_t *node,		/* I - XML node tree */
 
   if ((ind = calloc(1, sizeof(mxml_index_t))) == NULL)
   {
-    mxml_error("Unable to allocate %d bytes for index - %s",
-               sizeof(mxml_index_t), strerror(errno));
+    mxml_error("Unable to allocate %d bytes for index - %s", (int)sizeof(mxml_index_t), strerror(errno));
     return (NULL);
   }
 
@@ -361,9 +357,7 @@ mxmlIndexNew(mxml_node_t *node,		/* I - XML node tree */
         * Unable to allocate memory for the index, so abort...
 	*/
 
-        mxml_error("Unable to allocate %d bytes for index: %s",
-	           (ind->alloc_nodes + 64) * sizeof(mxml_node_t *),
-		   strerror(errno));
+        mxml_error("Unable to allocate %d bytes for index: %s", (int)((ind->alloc_nodes + 64) * sizeof(mxml_node_t *)), strerror(errno));
 
         mxmlIndexDelete(ind);
 	return (NULL);
